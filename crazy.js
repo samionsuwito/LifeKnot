@@ -33,6 +33,25 @@ function setCrazy(){
     console.log("switched to crazy");
 }
 
+function setExample() {
+    for(let i=0;i<32704;i += 65) {
+        if(i % 8 < 6){
+            mesh.geometry.faces[i].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 1].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 8].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 10].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 16].color.setRGB(0.110,0.918,0.259);
+
+            mesh.geometry.faces[i].materialIndex = 1;
+            mesh.geometry.faces[i + 1].materialIndex = 1;
+            mesh.geometry.faces[i + 8].materialIndex = 1;
+            mesh.geometry.faces[i + 10].materialIndex = 1;
+            mesh.geometry.faces[i + 16].materialIndex = 1;
+        }
+    }
+
+    mesh.geometry.colorsNeedUpdate = true;
+}
 
 function setTiming(value){
     document.getElementById("rangeLabel").innerHTML = "Updates every " + value + " frames";
