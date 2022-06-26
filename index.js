@@ -1,5 +1,6 @@
 let timer;
 let playing = false;
+let framesperchange = 30;
 // set inner height and width based on screen size
 const winWidth = window.innerWidth;
 const winHeight = window.innerHeight;// global vars
@@ -13,10 +14,30 @@ init();
 
 update();
 
+function setTiming(value){
+    document.getElementById("rangeLabel").innerHTML = "Updates every " + value + " frames";
+    framesperchange = Number(value);
+    timer = 0;
+}
+
+function clearState() {
+    for(let i=0;i<8192;i++) {
+        mesh.geometry.faces[i].color.setHex( 0x000030 );
+        mesh.geometry.faces[i].materialIndex = 0;
+    }
+    mesh.geometry.colorsNeedUpdate = true;
+    console.log("cleared");
+}
+
 function toggleSim(){
     console.log(!playing);
     playing = !playing;
     timer = 0;
+    if(playing){
+        document.getElementById("play").innerHTML = "Pause"
+    }else{
+        document.getElementById("play").innerHTML = "Play"
+    }
 }
 
 function init() {
@@ -80,7 +101,7 @@ function update() {
   requestAnimationFrame(update);
   controls.update();
   renderer.render(scene, camera);
-  if(timer === 10){
+  if(timer === framesperchange){
     if(playing){
        console.log("second");
        getState();
