@@ -14,6 +14,26 @@ init();
 
 update();
 
+function setExample() {
+    for(let i=0;i<8063;i += 161) {
+        if(i % 32 < 30){
+            mesh.geometry.faces[i].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 1].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 32].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 34].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i + 64].color.setRGB(0.110,0.918,0.259);
+
+            mesh.geometry.faces[i].materialIndex = 1;
+            mesh.geometry.faces[i + 1].materialIndex = 1;
+            mesh.geometry.faces[i + 32].materialIndex = 1;
+            mesh.geometry.faces[i + 34].materialIndex = 1;
+            mesh.geometry.faces[i + 64].materialIndex = 1;
+        }
+    }
+
+    mesh.geometry.colorsNeedUpdate = true;
+}
+
 function set32(){
     camera.position.set(0, 0, 1.5);
     scene.remove(mesh);
