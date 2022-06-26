@@ -14,6 +14,44 @@ init();
 
 update();
 
+function set32(){
+    camera.position.set(0, 0, 1.5);
+    scene.remove(mesh);
+    scene.remove(wireframe);
+    let geometry = new THREE.TorusKnotGeometry(0.27, 0.1,256, 32);
+    let material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors  } );
+    mesh = new THREE.Mesh( geometry, material );
+    for(let i=0;i<8192;i++){
+        mesh.geometry.faces[ i ].color.setHex( 0x000030 ); 
+        mesh.geometry.faces[ i ].materialIndex = 0;
+    }
+    wireframe = new THREE.WireframeHelper(mesh);
+    scene.add(wireframe);
+    scene.add(mesh);
+    objects = [];
+    objects.push(mesh);
+    console.log("switched to 3,2");
+}
+
+function set31(){
+    camera.position.set(0, 0, 1.5);
+    scene.remove(mesh);
+    scene.remove(wireframe);
+    let geometry = new THREE.TorusKnotGeometry(0.27, 0.1,256, 32, 1, 3);
+    let material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors  } );
+    mesh = new THREE.Mesh( geometry, material );
+    for(let i=0;i<8192;i++){
+        mesh.geometry.faces[ i ].color.setHex( 0x000030 ); 
+        mesh.geometry.faces[ i ].materialIndex = 0;
+    }
+    wireframe = new THREE.WireframeHelper(mesh);
+    scene.add(wireframe);
+    scene.add(mesh);
+    objects = [];
+    objects.push(mesh);
+    console.log("switched to 3,2");
+}
+
 function setTiming(value){
     document.getElementById("rangeLabel").innerHTML = "Updates every " + value + " frames";
     framesperchange = Number(value);
@@ -52,20 +90,9 @@ function init() {
   renderer.setSize(winWidth, winHeight);
   document.getElementById("three").appendChild( renderer.domElement );
 
-
   controls = new THREE.OrbitControls(camera, document.getElementById("three"));
-  let geometry = new THREE.TorusKnotGeometry(0.27, 0.1,256, 32);
-  let material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors  } );
-  mesh = new THREE.Mesh( geometry, material );
-  for(let i=0;i<8192;i++){
-    mesh.geometry.faces[ i ].color.setHex( 0x000030 ); 
-    mesh.geometry.faces[ i ].materialIndex = 0;
-  }
-  wireframe = new THREE.WireframeHelper(mesh);
-  scene.add(wireframe);
-  scene.add(mesh);
-  objects = [];
-  objects.push(mesh);
+
+  set32();
 
   // declare this statmenet whenever u change color
   //mesh.geometry.colorsNeedUpdate = true;
