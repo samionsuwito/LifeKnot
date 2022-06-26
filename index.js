@@ -1,13 +1,23 @@
+let timer;
+let playing = false;
 // set inner height and width based on screen size
 const winWidth = window.innerWidth;
 const winHeight = window.innerHeight;// global vars
 let scene, camera, renderer, controls, mesh, projector, materials, wireframe;
 let objects = [];
+let turnOn = [];
+let turnOff = [];
 
 
 init();
 
 update();
+
+function toggleSim(){
+    console.log(!playing);
+    playing = !playing;
+    timer = 0;
+}
 
 function init() {
   timer = 0;
@@ -70,10 +80,168 @@ function update() {
   requestAnimationFrame(update);
   controls.update();
   renderer.render(scene, camera);
+  if(timer === 10){
+    if(playing){
+       console.log("second");
+       getState();
+    }
+    timer = 0;
+  }else{
+    timer++;
+  }
 }
 
 function onWindowResize() {
     camera.aspect = winWidth / winHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(winWidth, winHeight);
+}
+
+function getState() {
+    for(let i=0;i<8192;i++) {
+        setValue(i)
+    }
+    turnOn.forEach((index) => {
+        mesh.geometry.faces[index].color.setRGB(0.110,0.918,0.259);
+        mesh.geometry.faces[index].materialIndex = 1;
+    });
+    turnOff.forEach((index) => {
+        mesh.geometry.faces[index].color.setHex( 0x000030 );
+        mesh.geometry.faces[index].materialIndex = 0;
+    });
+    mesh.geometry.colorsNeedUpdate = true;
+    turnOn = [];
+    turnOff = [];
+}
+
+function setValue(index) {
+    let neighbourValue = 0;
+    //values of neighbours
+    if(index < 32){
+        if(index % 32 == 0){
+            //same row
+            neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+            //row below
+            neighbourValue += mesh.geometry.faces[index + 8160].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 8161].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 8191].materialIndex;
+            //row above
+            neighbourValue += mesh.geometry.faces[index + 32].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 63].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 33].materialIndex;
+        } else if(index % 32 == 31){
+            //same row
+            neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+            //row below
+            neighbourValue += mesh.geometry.faces[index + 8160].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 8129].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 8159].materialIndex;
+            //row above
+            neighbourValue += mesh.geometry.faces[index + 32].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+        } else {
+            //same row
+            neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+            //row below
+            neighbourValue += mesh.geometry.faces[index + 8160].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 8161].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 8159].materialIndex;
+            //row above
+            neighbourValue += mesh.geometry.faces[index + 32].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 33].materialIndex;
+        }
+    } else if(index > 8159){
+        if(index % 32 == 0){
+            //8160
+            //same row
+            neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+            //row below
+            neighbourValue += mesh.geometry.faces[index - 32].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+            //row above
+            neighbourValue += mesh.geometry.faces[index - 8160].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 8159].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 8129].materialIndex;
+        } else if(index % 32 == 31){
+            //8191
+            //same row
+            neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+            //row below
+            neighbourValue += mesh.geometry.faces[index - 32].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 33].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 63].materialIndex;
+            //row above
+            neighbourValue += mesh.geometry.faces[index - 8160].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 8191].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 8161].materialIndex;
+        } else {
+            //same row
+            neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+            neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+            //row below
+            neighbourValue += mesh.geometry.faces[index - 32].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 33].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+            //row above
+            neighbourValue += mesh.geometry.faces[index - 8160].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 8161].materialIndex;
+            neighbourValue += mesh.geometry.faces[index - 8159].materialIndex;
+        }
+    } else if(index % 32 === 0){
+        //same row
+        neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+        //row below
+        neighbourValue += mesh.geometry.faces[index - 32].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+        //row above
+        neighbourValue += mesh.geometry.faces[index + 32].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 33].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 63].materialIndex;
+    } else if(index % 32 === 31){
+        //same row
+        neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+        //row below
+        neighbourValue += mesh.geometry.faces[index - 32].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 33].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 63].materialIndex;
+        //row above
+        neighbourValue += mesh.geometry.faces[index + 32].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+    }else{
+        //same row
+        neighbourValue += mesh.geometry.faces[index - 1].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 1].materialIndex;
+        //row below
+        neighbourValue += mesh.geometry.faces[index - 32].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 33].materialIndex;
+        neighbourValue += mesh.geometry.faces[index - 31].materialIndex;
+        //row above
+        neighbourValue += mesh.geometry.faces[index + 32].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 31].materialIndex;
+        neighbourValue += mesh.geometry.faces[index + 33].materialIndex;
+    }
+
+    if(mesh.geometry.faces[index].materialIndex){
+        if(!(neighbourValue === 2 || neighbourValue === 3)){
+            console.log("turn off: " + index);
+            turnOff.push(index);
+        }
+    }else{
+        if(neighbourValue === 3){
+            console.log("turn on: " + index);
+            turnOn.push(index);
+        }
+    }
 }
