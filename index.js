@@ -52,6 +52,44 @@ function set31(){
     console.log("switched to 3,2");
 }
 
+function set52(){
+    camera.position.set(0, 0, 2);
+    scene.remove(mesh);
+    scene.remove(wireframe);
+    let geometry = new THREE.TorusKnotGeometry(0.4, 0.1,256, 32, 2, 5);
+    let material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors  } );
+    mesh = new THREE.Mesh( geometry, material );
+    for(let i=0;i<8192;i++){
+        mesh.geometry.faces[ i ].color.setHex( 0x000030 ); 
+        mesh.geometry.faces[ i ].materialIndex = 0;
+    }
+    wireframe = new THREE.WireframeHelper(mesh);
+    scene.add(wireframe);
+    scene.add(mesh);
+    objects = [];
+    objects.push(mesh);
+    console.log("switched to 5,2");
+}
+
+function set73(){
+    camera.position.set(0, 0, 2);
+    scene.remove(mesh);
+    scene.remove(wireframe);
+    let geometry = new THREE.TorusKnotGeometry(0.4, 0.07,256, 32, 3, 7);
+    let material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors  } );
+    mesh = new THREE.Mesh( geometry, material );
+    for(let i=0;i<8192;i++){
+        mesh.geometry.faces[ i ].color.setHex( 0x000030 ); 
+        mesh.geometry.faces[ i ].materialIndex = 0;
+    }
+    wireframe = new THREE.WireframeHelper(mesh);
+    scene.add(wireframe);
+    scene.add(mesh);
+    objects = [];
+    objects.push(mesh);
+    console.log("switched to 5,2");
+}
+
 function setTiming(value){
     document.getElementById("rangeLabel").innerHTML = "Updates every " + value + " frames";
     framesperchange = Number(value);
