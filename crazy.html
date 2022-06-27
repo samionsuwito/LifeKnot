@@ -15,11 +15,13 @@
         <button style="position: sticky; top:100px; z-index: 100;" onclick="toggleSim()" id="play">Play</button>
         <button style="position: sticky; top:100px; z-index: 100;" onclick="getState()">Next State</button>
         <button style="position: sticky; top:100px; z-index: 100;" onclick="clearState()">Clear State</button>
-        <label style="position: sticky; top:100px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="sliderRange" id="rangeLabel">Updates every 30 frames</label>
-        <input style="position: sticky; top:100px; z-index: 100;" type="range" min="1" max="60" value="30" step="1" id="sliderRange" onchange="setTiming(this.value)">
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="setExample()">Use Example</button>
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="setRandom()">Randomize</button>
         <br>
-        <button style="position: sticky; top:130px; z-index: 100;" onclick="setExample()">Use Example</button>
-        <a href="https://isitusnoamow.github.io/LifeKnot/"><button style="position: sticky; top:130px; z-index: 100;" >Go Back to the other knots</button></a>
+        <label style="position: sticky; top:130px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="sliderRange" id="rangeLabel">Updates every 30 frames</label>
+        <input style="position: sticky; top:130px; z-index: 100;" type="range" min="1" max="60" value="30" step="1" id="sliderRange" onchange="setTiming(this.value)">
+        <br>
+        <a href="https://isitusnoamow.github.io/LifeKnot/"><button style="position: sticky; top:160px; z-index: 100;" >Go Back to the other knots</button></a>
         <div id="three" style="width: 100%; height: 100%; position: absolute; top:0px;"></div>
         <script src="crazy.js"></script>
     </div>

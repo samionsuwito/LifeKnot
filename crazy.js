@@ -14,6 +14,19 @@ init();
 
 update();
 
+function setRandom(){
+    for(let i=0;i<32768;i++){
+        if(Math.random() < 0.5){
+            mesh.geometry.faces[i].color.setRGB(0.110,0.918,0.259);
+            mesh.geometry.faces[i].materialIndex = 1;
+        }else{
+            mesh.geometry.faces[ i ].color.setHex( 0x000030 ); 
+            mesh.geometry.faces[ i ].materialIndex = 0;
+        }
+    }
+    mesh.geometry.colorsNeedUpdate = true;
+}
+
 function setCrazy(){
     camera.position.set(0, 0, 2);
     scene.remove(mesh);

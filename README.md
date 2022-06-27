@@ -14,6 +14,7 @@ Conway's Game of Life simulation on Torus Knots
 * Play, Next, Clear Buttons
 * Example state provided
 * Speed of simulation controller
+* Randomize State provided
 
 ## Usage
 
