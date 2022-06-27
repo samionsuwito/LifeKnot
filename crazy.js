@@ -129,7 +129,7 @@ function update() {
   requestAnimationFrame(update);
   controls.update();
   renderer.render(scene, camera);
-  if(timer === framesperchange){
+  if(timer === (framesperchange - 1)){
     if(playing){
        console.log("second");
        getState();
