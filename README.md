@@ -4,7 +4,7 @@ Conway's Game of Life simulation on Torus Knots
 
 ## Key Features
 
-* Simulate Conway's Game of Life on 5 Different Torus Knots
+* Simulate Conway's Game of Life on 5 Different Predefined Torus Knots
     - (3,1) Knot
     - Trefoil Knot
     - Solomon's Seal Knot
@@ -15,6 +15,7 @@ Conway's Game of Life simulation on Torus Knots
 * Example state provided
 * Speed of simulation controller
 * Randomize State provided
+* Custom Knot that you can control
 
 ## Usage
 

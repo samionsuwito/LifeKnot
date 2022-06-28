@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: black;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knots of Life</title>
+    <script src="three.js"></script>
+    <script src="OrbitControls.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <div style="width: 100vw; height: 100vh;">
+        <h1 style="font-family: Arial, Helvetica, sans-serif; color:white; z-index: 100; position: sticky; top:60px;">Knots of Life</h1>
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="toggleSim()" id="play">Play</button>
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="getState()">Next State</button>
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="clearState()">Clear State</button>
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="setExample()">Use Example</button>
+        <button style="position: sticky; top:100px; z-index: 100;" onclick="setRandom()">Randomize</button>
+        <br>
+        <label style="position: sticky; top:130px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="sliderRange" id="rangeLabel">Updates every 30 frames</label>
+        <input style="position: sticky; top:130px; z-index: 100;" type="range" min="1" max="60" value="30" step="1" id="sliderRange" onchange="setTiming(this.value)">
+        <br>
+            <label style="position: sticky; top:160px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="torusrad">Radius of Torus:</label>
+            <input style="position: sticky; top:160px; z-index: 100;" type="number" id="torusrad" class="numbers">
+            <label style="position: sticky; top:160px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="tuberad">Radius of Tube:</label>
+            <input style="position: sticky; top:160px; z-index: 100;" type="number" id="tuberad" class="numbers">
+        <br>
+            <label style="position: sticky; top:190px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="p">p:</label>
+            <input style="position: sticky; top:190px; z-index: 100;" type="number" id="p" class="numbers">
+            <label style="position: sticky; top:190px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="q">q:</label>
+            <input style="position: sticky; top:190px; z-index: 100;" type="number" id="q" class="numbers">
+        <br>
+            <label style="position: sticky; top:220px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="tubular">Tubular Segments:</label>
+            <input style="position: sticky; top:220px; z-index: 100;" type="number" id="tubular" class="numbers">
+            <label style="position: sticky; top:220px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="radial">Radial Segments:</label>
+            <input style="position: sticky; top:220px; z-index: 100;" type="number" id="radial" class="numbers">
+        <br>
+            <button style="position: sticky; top:250px; z-index: 100;" onclick="setNew()">Create</button>
+        <br>
+        <a href="https://isitusnoamow.github.io/LifeKnot/"><button style="position: sticky; top:280px; z-index: 100;" >Go Back to the other knots</button></a>
+        <div id="three" style="width: 100%; height: 100%; position: absolute; top:0px;"></div>
+        <script src="custom.js"></script>
+    </div>
+</body>
+</html>
