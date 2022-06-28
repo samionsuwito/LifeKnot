@@ -23,13 +23,13 @@ Check it out at [https://isitusnoamow.github.io/LifeKnot/](https://isitusnoamow.
 ## Examples
 
 <div align="center">
-    <img width="300" height="300" src="./examples/31knot.gif">
-    <img width="300" height="300" src="./examples/trefoil.gif">
-    <img width="300" height="300" src="./examples/solomon.gif">
+    <img width="200" height="200" src="./examples/31knot.gif">
+    <img width="200" height="200" src="./examples/trefoil.gif">
+    <img width="200" height="200" src="./examples/solomon.gif">
 </div>
 <div align = "center">
-    <img widh="300" height="300" src="./examples/73.gif">
-    <img width="300" height="300" src="./examples/torustorus.gif">
+    <img widh="200" height="200" src="./examples/73.gif">
+    <img width="200" height="200" src="./examples/torustorus.gif">
 </div>
 
 Going from Left to Right: 

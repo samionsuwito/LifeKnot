@@ -10,3 +10,11 @@ button:hover{
     background-color: #1CEA42;
     color: #2157e0;
 }
+
+.numbers{
+    border-radius: 4px;
+    border: 2px solid #2157e0;
+    color: #1CEA42;
+    background-color: #000030;
+    width: 100px;
+}
