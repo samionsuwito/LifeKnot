@@ -7,6 +7,8 @@
     <title>Knots of Life</title>
     <script src="three.js"></script>
     <script src="OrbitControls.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5.0.11/dark.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
@@ -21,13 +23,16 @@
         <label style="position: sticky; top:130px; z-index: 100; color: white; font-family: Arial, Helvetica, sans-serif;" for="sliderRange" id="rangeLabel">Updates every 30 frames</label>
         <input style="position: sticky; top:130px; z-index: 100;" type="range" min="1" max="60" value="30" step="1" id="sliderRange" onchange="setTiming(this.value)">
         <br>
-        <button style="position: sticky; top:160px; z-index: 100;" onclick="set31()">Switch to (3,1) torus knot</button>
-        <button style="position: sticky; top:160px; z-index: 100;" onclick="set32()">Switch to trefoil knot</button>
-        <button style="position: sticky; top:160px; z-index: 100;" onclick="set52()">Switch to Solomon's Seal knot</button>
+        <button style="position: sticky; top:160px; z-index: 100;" onclick="openImport()">Import</button>
+        <button style="position: sticky; top:160px; z-index: 100;" onclick="openExport()">Export</button>
         <br>
-        <button style="position: sticky; top:190px; z-index: 100;" onclick="set73()">Switch to (7,3) torus knot</button>
-        <a href="https://isitusnoamow.github.io/LifeKnot/crazy.html"><button style="position: sticky; top:190px; z-index: 100;" >Switch to torus knot of torus</button></a>
-        <a href="https://isitusnoamow.github.io/LifeKnot/custom.html"><button style="position: sticky; top:190px; z-index: 100;" >Switch to custom knot</button></a>
+        <button style="position: sticky; top:190px; z-index: 100;" onclick="set31()">Switch to (3,1) torus knot</button>
+        <button style="position: sticky; top:190px; z-index: 100;" onclick="set32()">Switch to trefoil knot</button>
+        <button style="position: sticky; top:190px; z-index: 100;" onclick="set52()">Switch to Solomon's Seal knot</button>
+        <br>
+        <button style="position: sticky; top:220px; z-index: 100;" onclick="set73()">Switch to (7,3) torus knot</button>
+        <a href="https://isitusnoamow.github.io/LifeKnot/crazy.html"><button style="position: sticky; top:220px; z-index: 100;" >Switch to torus knot of torus</button></a>
+        <a href="https://isitusnoamow.github.io/LifeKnot/custom.html"><button style="position: sticky; top:220px; z-index: 100;" >Switch to custom knot</button></a>
         <div id="three" style="width: 100%; height: 100%; position: absolute; top:0px;"></div>
         <script src="index.js"></script>
     </div>
