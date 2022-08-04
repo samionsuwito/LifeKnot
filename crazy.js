@@ -92,6 +92,62 @@ function toggleSim(){
     }
 }
 
+function openImport() {
+    Swal.fire({
+        title: "Import Faces",
+        html: "<input type='text' id='importval'>",
+        confirmButtonText: 'Import',
+        focusConfirm: false,
+        preConfirm: () => {
+            const importval = Swal.getPopup().querySelector('#importval').value;
+            if (!importval) {
+                Swal.showValidationMessage('Please enter a code');
+            }else if (importval.length !== 32768) {
+                Swal.showValidationMessage('Please enter a code of length 32768');
+            }else if (!(/^[0-1]+$/.test(importval))){
+                Swal.showValidationMessage('Please enter a code with only 0 and 1');
+            }
+            return importval
+        }
+    }).then((result) => {
+        if (result.value) {
+            importval = result.value;
+            setImport();
+        }
+        
+    })
+}
+
+function setImport() {
+    for (let i = 0; i < 32768; i++) {
+        let pointer = Number(importval[i]);
+        if (pointer === 1) {
+            mesh.geometry.faces[i].color.setRGB(0.110, 0.918, 0.259);
+            mesh.geometry.faces[i].materialIndex = 1;
+        } else {
+            mesh.geometry.faces[i].color.setHex(0x000030);
+            mesh.geometry.faces[i].materialIndex = 0;
+        }
+    }
+    mesh.geometry.colorsNeedUpdate = true;
+}
+
+function openExport() {
+    setExport();
+    Swal.fire({
+        title: "Copy the following text",
+        html: `<input type="text" value="${exportval}" readonly>`,
+        confirmButtonText: 'Copied!',
+    })
+}
+
+function setExport() {
+    exportval = "";
+    for (let i = 0; i < 32768; i++) {
+        exportval += String(mesh.geometry.faces[i].materialIndex);
+    }
+}
+
 function init() {
   timer = 0;
   scene = new THREE.Scene({ antialias:true });

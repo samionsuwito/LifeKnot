@@ -196,7 +196,7 @@ function openExport() {
     Swal.fire({
         title: "Copy the following text",
         html: `<input type="text" value="${exportval}" readonly>`,
-        confirmButtonText: 'Done',
+        confirmButtonText: 'Copied!',
     })
 }
 
