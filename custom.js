@@ -9,6 +9,8 @@ let objects = [];
 let turnOn = [];
 let turnOff = [];
 let p, q, torusrad, tuberad, tubular, radial, totalfaces;
+let importval = "";
+let exportval = "";
 
 init();
 
@@ -126,6 +128,82 @@ function toggleSim() {
         document.getElementById("play").innerHTML = "Pause"
     } else {
         document.getElementById("play").innerHTML = "Play"
+    }
+}
+
+function openImport() {
+    Swal.fire({
+        title: "Import Faces",
+        html: "<input type='text' id='importval'>",
+        confirmButtonText: 'Import',
+        focusConfirm: false,
+        preConfirm: () => {
+            const importval = Swal.getPopup().querySelector('#importval').value;
+            if (!importval) {
+                Swal.showValidationMessage('Please enter a code');
+            } else if (importval[0] != 'a') {
+                Swal.showValidationMessage('Please enter a custom code');
+            }
+            return importval
+        }
+    }).then((result) => {
+        if (result.value) {
+            importval = result.value;
+            setImport();
+        }
+
+    })
+}
+
+function setImport() {
+    p = Number(importval.substring(importval.indexOf("a") + 1, importval.indexOf("b")));
+    q = Number(importval.substring(importval.indexOf("b") + 1, importval.indexOf("c")));
+    torusrad = Number(importval.substring(importval.indexOf("c") + 1, importval.indexOf("d")));
+    tuberad = Number(importval.substring(importval.indexOf("d") + 1, importval.indexOf("e")));
+    tubular = Number(importval.substring(importval.indexOf("e") + 1, importval.indexOf("f")));
+    radial = Number(importval.substring(importval.indexOf("f") + 1, importval.indexOf("g")));
+    totalfaces = tubular * radial;
+    setKnot();
+    let sequence = importval.substring(importval.indexOf("g") + 1);
+    console.log("length: " + sequence.length);
+    console.log("total: " + totalfaces);
+    for (let i = 0; i < totalfaces; i++){
+        let pointer = Number(importval[i]);
+        if (pointer === 1) {
+            mesh.geometry.faces[i].color.setRGB(0.110, 0.918, 0.259);
+            mesh.geometry.faces[i].materialIndex = 1;
+        } else {
+            mesh.geometry.faces[i].color.setHex(0x000030);
+            mesh.geometry.faces[i].materialIndex = 0;
+        }
+    }
+}
+
+function openExport() {
+    setExport();
+    Swal.fire({
+        title: "Copy the following text",
+        html: `<input type="text" value="${exportval}" readonly>`,
+        confirmButtonText: 'Copied!',
+    })
+}
+
+function setExport() {
+    exportval = "a";
+    exportval += String(p);
+    exportval += "b";
+    exportval += String(q);
+    exportval += "c";
+    exportval += String(torusrad);
+    exportval += "d";
+    exportval += String(tuberad);
+    exportval += "e";
+    exportval += String(tubular);
+    exportval += "f";
+    exportval += String(radial)
+    exportval += "g";
+    for (let i = 0; i < totalfaces; i++) {
+        exportval += String(mesh.geometry.faces[i].materialIndex);
     }
 }
 
