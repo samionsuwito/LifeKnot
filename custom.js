@@ -103,6 +103,12 @@ function setDefault() {
     objects = [];
     objects.push(mesh);
     console.log("switched to 3,2");
+    document.getElementById("p").value = String(p);
+    document.getElementById("q").value = String(q);
+    document.getElementById("torusrad").value = String(torusrad);
+    document.getElementById("tuberad").value = String(tuberad);
+    document.getElementById("tubular").value = String(tubular);
+    document.getElementById("radial").value = String(radial);
 }
 
 function setTiming(value) {
@@ -177,6 +183,12 @@ function setImport() {
             mesh.geometry.faces[i].materialIndex = 0;
         }
     }
+    document.getElementById("p").value = String(p);
+    document.getElementById("q").value = String(q);
+    document.getElementById("torusrad").value = String(torusrad);
+    document.getElementById("tuberad").value = String(tuberad);
+    document.getElementById("tubular").value = String(tubular);
+    document.getElementById("radial").value = String(radial);
 }
 
 function openExport() {
