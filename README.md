@@ -16,6 +16,7 @@ Conway's Game of Life simulation on Torus Knots
 * Speed of simulation controller
 * Randomize State provided
 * Custom Knot that you can control
+* Import and Export
 
 ## Usage
 
