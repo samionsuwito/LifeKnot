@@ -148,7 +148,13 @@ function openImport() {
             if (!importval) {
                 Swal.showValidationMessage('Please enter a code');
             } else if (importval[0] != 'a') {
-                Swal.showValidationMessage('Please enter a custom code');
+                if(importval.length === 8192){
+                    Swal.showValidationMessage('This code is for the main page. Please enter a custom code');
+                }else if(importval.length === 32768){
+                    Swal.showValidationMessage('This code is for the crazy knot. Please enter a custom code');
+                }else{
+                   Swal.showValidationMessage('Please enter a custom code');
+                }
             }
             return importval
         }
