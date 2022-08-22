@@ -44,3 +44,7 @@ Going from Left to Right:
 ## Built With
 
 Made using Three.js r59 in order to use Face4 and an older version of OrbitControls
+
+## Next Steps
+
+Recreate using latest Three.js which wil fix performance and fix mobile controls.
